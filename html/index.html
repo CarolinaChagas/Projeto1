@@ -1,0 +1,71 @@
+<!-- shift+alt+f = prettier formatar -->
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atividade 2</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script type="module" src="../js/script.js"></script>
+  </head>
+
+  <body>
+    <button class="botao">Carregar Posts</button>
+
+    <div class="posts"></div>
+
+    <script type="module">
+      // const p = document.createElement("p");
+      // p.innerText = "Paragráfo";
+
+      // const div = document.querySelector("div.caixa");
+      // div.appendChild(p);
+
+      //1° forma de se fazer uma função assíncrona
+      // async function get_posts() {
+      //   return fetch("https://jsonplaceholder.typicode.com/posts")
+      //     .then(function (response) {
+      //       return response.json();
+      //     })
+      //     .catch((err) => console.log(err));
+      // }
+
+      // 2° Forma - arrow functions - forma mais otimizada e usual de se fazer uma função
+      const getPosts = async () =>
+        fetch("https://jsonplaceholder.typicode.com/posts").then((response) =>
+          response.json()
+        );
+
+      const posts = await getPosts();
+      const div = document.querySelector("div.posts");
+
+      document.querySelector(".botao").addEventListener("click", async () => {
+        const posts = await getPosts();
+
+        //utilizar createTextNode para lista de frutas, por exemplo
+        const lista = ["Banana", "Maçã", "Laranja"];
+        const ul = document.createElement("ul");
+        lista.forEach((frutas) => {
+          const li = document.createElement("li");
+          const textNode = document.createTextNode(frutas);
+          li.appendChild(textNode);
+          ul.appendChild(li);
+
+          ul.style.marginTop = "10px";
+          ul.style.marginBottom = "10px";
+        });
+
+        div.appendChild(ul);
+
+        for (let i = 0; i < posts.length; i++) {
+          const post = posts[i];
+          const p = document.createElement("p");
+          p.innerText = post["body"];
+          console.log(p);
+          p.style.color = "blue";
+          div.appendChild(p);
+        }
+      });
+    </script>
+  </body>
+</html>

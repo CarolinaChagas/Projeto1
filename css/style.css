@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    background-color: #d07ab6;
+}
+
+.botao{
+    background-color: rgb(33, 211, 152);
+    padding: 10px;
+}
